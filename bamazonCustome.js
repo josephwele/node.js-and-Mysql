@@ -17,7 +17,22 @@ connection.query('SELECT * FROM products', function(error, results, fields) {
     results.forEach(element => {
         console.log(`Available item are:`, element);
     });
+    inquirer
+        .prompt([{
+                type: 'input',
+                name: 'sku',
+                message: "what is thee SKU of the product that you would like to buy"
+            },
+            {
+                type: 'input',
+                name: 'unit',
+                message: "'how many units of the product you would like to buy'"
+
+            }
+        ])
 
 });
+
+
 
 connection.end();
