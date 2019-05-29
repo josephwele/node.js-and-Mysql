@@ -11,12 +11,18 @@ var connection = mysql.createConnection({
     database: 'bamazon'
 });
 connection.connect();
+var id, unit;
 
 connection.query('SELECT * FROM products', function(error, results, fields) {
     if (error) throw error;
     results.forEach(element => {
         console.log(`Available item are:`, element);
     });
+    inq();
+
+});
+
+function inq() {
     inquirer
         .prompt([{
                 type: 'input',
@@ -30,9 +36,31 @@ connection.query('SELECT * FROM products', function(error, results, fields) {
 
             }
         ])
+        .then(answers => {
+            id = answers.sku;
+            unit = answers.unit;
+            update(id, unit)
+                //delet(id, unit);
 
-});
+        })
+}
 
+function update(id, unit) {
+    connection.query(`UPDATE products SET stock_quantity=? WHERE sku=?`, [
+        unit,
+        id
+    ], function(err, res, fields) {
+        if (err) throw err;
+        console.log(res.affectedRows + ' products updated!\n')
+    })
 
+    connection.end();
+}
 
-connection.end();
+function delet(id, unit) {
+    connection.query('DELETE FROM products WHERE sku=?', [id], function(err, res, fields) {
+        if (err) throw err;
+        console.log(res.affectedRows + "products deleted")
+    })
+    connection.end();
+}
