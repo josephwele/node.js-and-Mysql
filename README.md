@@ -3,6 +3,7 @@ combining mysql and node.js. Here i am gonna use inquirer and Mysql packages.
 * what the app do?
 1. ask the user to put the id(sku) of the product 
 2. ask how many products needed
+3. calculate the amount price to the user 
 
 images showing the functionality of the app
 
