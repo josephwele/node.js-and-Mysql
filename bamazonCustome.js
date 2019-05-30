@@ -17,7 +17,9 @@ connection.query('SELECT * FROM products', function(error, results, fields) {
     if (error) throw error;
     results.forEach(element => {
         console.log(`Available item are:`, element);
+
     });
+    console.log("***********************************************");
     inq();
 
 });
@@ -40,21 +42,28 @@ function inq() {
             id = answers.sku;
             unit = answers.unit;
             update(id, unit)
-                //delet(id, unit);
 
         })
 }
 
 function update(id, unit) {
-    connection.query(`UPDATE products SET stock_quantity=? WHERE sku=?`, [
-        unit,
+    connection.query(`SELECT * FROM products WHERE sku=?`, [
         id
     ], function(err, res, fields) {
         if (err) throw err;
-        console.log(res.affectedRows + ' products updated!\n')
-    })
+        //console.log(res[0].price, res[0].stock_quantity)
+        if (res[0].stock_quantity - unit >= 0) {
+            connection.query('UPDATE products set stock_quantity=? WHERE sku=?', [res[0].stock_quantity - unit, id],
+                function(err, results) {
+                    if (err) throw err;
 
-    connection.end();
+                })
+            console.log("***********************************************");
+            console.log(`Your total cost is:${(res[0].price)*unit}`);
+        } else
+            console.log(`insufficient quantity:
+        avalaible stocks are ${res[0].stock_quantity}`);
+    })
 }
 
 function delet(id, unit) {
