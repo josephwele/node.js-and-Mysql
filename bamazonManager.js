@@ -56,7 +56,7 @@ function view() {
         if (error) throw error;
         results.forEach(element => {
             console.log(`Available item are:`, element);
-
+            domore();
         });
         console.log("*************************************\\**********");
     })
@@ -100,35 +100,12 @@ function addnew() {
 
 }
 
-function delet(id, unit) {
-    connection.query('DELETE FROM products WHERE sku=?', [id], function(err, res, fields) {
-        if (err) throw err;
-        console.log(res.affectedRows + "products deleted")
-    })
-    connection.end();
-}
-
-function domore() {
-    inquirer
-        .prompt({
-
-            type: 'confirm',
-            name: 'comments',
-            message: 'Do you need to do more?',
-            default: false
-
-        })
-        .then(answers => {
-            if (answers.comments) inq();
-            else
-                connection.end();
-
-        })
-}
-
 function viewlow() {
     connection.query('SELECT * FROM products WHERE stock_quantity<5', function(err, res) {
         if (err) throw err;
+        res.forEach(answers => {
+            console.log(answers);
+        })
         domore();
     })
 }
@@ -161,4 +138,22 @@ function additem() {
 
         })
 
+}
+
+function domore() {
+    inquirer
+        .prompt({
+
+            type: 'confirm',
+            name: 'comments',
+            message: 'Do you need to do more?',
+            default: false
+
+        })
+        .then(answers => {
+            if (answers.comments) inq();
+            else
+                connection.end();
+
+        })
 }
