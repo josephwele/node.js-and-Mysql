@@ -12,7 +12,8 @@ images showing the functionality of the app
 
 The app console log insufficient quantity when enough quantity not available 
 ![insufficient](assets/insufficient.jpg)
-##**challenge number-2**
+
+## **challenge number-2**
 
 the app helps the manger of the store to 
 * View Products for Sale
