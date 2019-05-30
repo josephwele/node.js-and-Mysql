@@ -118,5 +118,12 @@ function domore() {
             default: false
 
         })
+        .then(answers => {
+            console.log(answers.comments);
+            if (answers.comments) inq();
+            else
+                connection.end();
+
+        })
 
 }
