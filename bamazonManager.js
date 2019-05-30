@@ -16,17 +16,6 @@ var id, unit;
 // asks the manager what to do
 inq()
 
-function view() {
-    connection.query('SELECT * FROM products', function(error, results, fields) {
-        if (error) throw error;
-        results.forEach(element => {
-            console.log(`Available item are:`, element);
-
-        });
-        console.log("***********************************************");
-    })
-}
-
 function inq() {
     inquirer
         .prompt({
@@ -62,8 +51,18 @@ function inq() {
         })
 }
 
+function view() {
+    connection.query('SELECT * FROM products', function(error, results, fields) {
+        if (error) throw error;
+        results.forEach(element => {
+            console.log(`Available item are:`, element);
 
-function additem() {
+        });
+        console.log("***********************************************");
+    })
+}
+
+function addnew() {
     inquirer
         .prompt([{
                 type: 'input',
@@ -94,7 +93,7 @@ function additem() {
                 if (err) throw err;
                 //console.log(res[0].price, res[0].stock_quantity)
                 console.log("New items added");
-
+                domore();
             })
 
         })
@@ -110,5 +109,14 @@ function delet(id, unit) {
 }
 
 function domore() {
+    inquirer
+        .prompt({
+
+            type: 'confirm',
+            name: 'comments',
+            message: 'Do you need to do more?',
+            default: false
+
+        })
 
 }

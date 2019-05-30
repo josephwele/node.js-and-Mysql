@@ -10,5 +10,6 @@ images showing the functionality of the app
 
 ![img showing user input and total cost](assets/userinput.jpg)
 
-The app console log insufficient quantity when enough quantity not available [insufficient](assets/insufficient.jpg)
+The app console log insufficient quantity when enough quantity not available 
+![insufficient](assets/insufficient.jpg)
 
