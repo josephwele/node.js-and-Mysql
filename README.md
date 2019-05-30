@@ -27,4 +27,6 @@ the app helps the manger of the store to
     * ![image](assets/additem.jpg)
 * Add New Product
     * ![image](assets/addNew.jpg)
-
+## **challenge number-3**
+The app creates the products_sales column on the products table and able to update it from bamazon.js file
+![image](assets/products_sales.jpg)
