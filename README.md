@@ -30,3 +30,6 @@ the app helps the manger of the store to
 ## **challenge number-3**
 The app creates the products_sales column on the products table and able to update it from bamazon.js file
 ![image](assets/products_sales.jpg)
+
+**supervisor to view profit column**
+![image](assets/supervisor.jpg)

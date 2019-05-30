@@ -34,3 +34,12 @@ function inq() {
 
         })
 }
+
+function view() {
+    var query = 'SELECT departments.department_id,departments.department_name,departments.over_head_cost,products.products_sales FROM departments left join products on departments.department_name=products.department_name'
+    connection.query(query, function(err, res) {
+        if (err) throw err
+        else
+            console.log(res);
+    })
+}
