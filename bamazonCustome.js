@@ -11,8 +11,8 @@ var connection = mysql.createConnection({
     database: 'bamazon'
 });
 connection.connect();
+//declaring the variable id and unit globaly to use them any where in the functions
 var id, unit;
-
 connection.query('SELECT * FROM products', function(error, results, fields) {
     if (error) throw error;
     results.forEach(element => {
