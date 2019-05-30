@@ -58,7 +58,7 @@ function view() {
             console.log(`Available item are:`, element);
 
         });
-        console.log("***********************************************");
+        console.log("*************************************\\**********");
     })
 }
 
@@ -95,7 +95,7 @@ function addnew() {
                 console.log("New items added");
                 domore();
             })
-
+            console.log("***********************************************");
         })
 
 }
@@ -119,10 +119,45 @@ function domore() {
 
         })
         .then(answers => {
-            console.log(answers.comments);
             if (answers.comments) inq();
             else
                 connection.end();
+
+        })
+}
+
+function viewlow() {
+    connection.query('SELECT * FROM products WHERE stock_quantity<5', function(err, res) {
+        if (err) throw err;
+        domore();
+    })
+}
+
+function additem() {
+    inquirer
+        .prompt([{
+            type: "input",
+            name: "id",
+            message: "what is the sku of the product you need to add?"
+        }, {
+            type: "input",
+            name: "item",
+            message: "how many items do you need to add?"
+
+        }])
+        .then(answers => {
+            connection.query(`SELECT * FROM products WHERE sku=?`, [
+                answers.id
+            ], function(err, res) {
+                if (err) throw err;
+                connection.query('UPDATE products set stock_quantity=? WHERE sku=?', [res[0].stock_quantity + answers.item, answers.id],
+                    function(err, results) {
+                        if (err) throw err;
+                        console.log(`${answers.item} items succesfully added to ${res[0].product_name}`)
+                        domore();
+                    })
+
+            })
 
         })
 
